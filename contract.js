@@ -11,7 +11,6 @@ const getAccountsButton = document.getElementById("accounts");
 //Button Click Connect to Metamask
 connectButton.addEventListener('click', async() => {
   await ethereum.request({ method: 'eth_requestAccounts' });
-
 });
 
 
