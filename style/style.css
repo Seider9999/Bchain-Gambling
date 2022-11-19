@@ -1,4 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+/*                */
+/* OVERALL*/
+/*                */
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
+
+/*                */
+/* MASTER WRAP*/
+/*                */
+.master-wrap{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 70%;
+    height: auto;
+}
+
+.master-wrap h1{
+    text-align: center;
+}
+
+/*                */
+/* WALLET BOX     */
+/*                */
+.master-wrap .wallet-box{
+    height: 600px;
+    width: 450px;
+    background-color: #fff ;
+    margin: 0 auto;
+    margin-top: 40px;
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.master-wrap .wallet-box .title-box{
+    font-size: 2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/*                */
+/* BUTTON SETTINGS*/
+/*                */
+     
+#connect{
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    width: 200px;
+    border: none;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(222,165,227,1) 0%, rgba(0,212,255,1) 100%);
+    color: #fff;
+    margin-top: 50px;
+    cursor: pointer;
+
+}
+
+#connect:hover{
+    box-shadow: 0 6px 7px 0 rgba(0,0,0,0.24),0 12px 30px 0 rgba(0,0,0,0.19);
+}
+
+#accounts{
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    width: 200px;
+    border: none;
+    border: 1px solid #000;
+    color: #000;
+    margin-top: 50px;
+    cursor: pointer;
+    margin-top: 200px;
+}
+
+#accounts:hover{
+    box-shadow: 0 6px 7px 0 rgba(0,0,0,0.24),0 12px 30px 0 rgba(0,0,0,0.19);
+}
+ 
+ 
