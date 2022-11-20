@@ -32,16 +32,17 @@ getAccountsButton.addEventListener('click', async () => {
     //Call ETH Accounts
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     const balance = await ethereum.request({ method: 'eth_getBalance', params:[accounts[0],"latest"]  });
+
     
     //Display first Adress connected
     const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
-    const AccountBalance = balance[0] || 'Not able to get accounts // Please Connect your Wallet';
+    const AccountBalance = balance[0] || 'Not able to get Balance // Please Connect your Wallet';
 
      //Write to Box
      document.getElementById('adress').innerText = AccountAdress
      document.getElementById('balance').innerText = AccountBalance
 
-   
+ 
 
      
   });

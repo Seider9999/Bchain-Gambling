@@ -18,15 +18,16 @@
     height: auto;
 }
 
-.master-wrap h1{
+ h1{
     text-align: center;
+    margin-top: 40px;
 }
 
 /*                */
 /* WALLET BOX     */
 /*                */
 .master-wrap .wallet-box{
-    height: 600px;
+    height: 400px;
     width: 700px;
     background-color: #fff ;
     margin: 0 auto;
@@ -42,6 +43,40 @@
 }
 
 /*                */
+/* Game Box       */
+/*                */
+.master-wrap .game-box{
+    height: 600px;
+    width: 700px;
+    background-color: #fff ;
+    margin: 0 auto;
+    margin-top: 40px;
+    border: 1px solid #000;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.master-wrap .game-box .title-box{
+    font-size: 2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.master-wrap .game-box #fieldAccount{
+    margin: 0 auto;
+    width: 80%;
+    height: 50px;
+    border: 1px solid #000;
+    margin-top: 20px;
+}
+
+.master-wrap .game-box #fieldAccount .title{
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+/*                */
 /* Field           */
 /*                */
 .master-wrap .wallet-box #fieldAccount{
@@ -49,7 +84,7 @@
     width: 80%;
     height: 50px;
     border: 1px solid #000;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 
 .master-wrap .wallet-box #fieldAccount .title{
@@ -93,9 +128,8 @@
     border: none;
     border: 1px solid #000;
     color: #000;
-    margin-top: 50px;
     cursor: pointer;
-    margin-top: 200px;
+    margin-top: 20px;
 }
 
 #accounts:hover{
