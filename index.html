@@ -6,46 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bchain Gambling</title>
     <link rel="stylesheet" href="style/style.css">
-    
+
     <script src="https://github.com/ChainSafe/web3.js/blob/v1.2.11/dist/web3.min.js"></script>
 
     <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
     <script src="contract.js"></script>
 </head>
 <body>
-    <h1>BCHAIN Gambling Application</h1>
+<h1>BCHAIN Gambling Application</h1>
 <div class="master-wrap">
 
     <div class="wallet-box">
 
-        <p class = "title-box">Options</p>
+        <p class="title-box">Options</p>
 
         <button id="connect">
             <p>Connect Wallet</p>
         </button>
-        
-        <div id="Account-section">
-        <button id="accounts">
-            <p>Get Account</p>
-        </button>
-        
-        <div id="fieldAccount">
-        <p class="title">ETH Account Connected:</p>    
-        <p id="adress"></p>
-        </div>
 
-        <div id="fieldAccount">
-            <p class="title">Balance:</p>    
-            <p id="balance"></p>
+        <div id="Account-section">
+            <button id="accounts">
+                <p>Get Account</p>
+            </button>
+
+            <div id="fieldAccount">
+                <p class="title">ETH Account Connected:</p>
+                <p id="adress"></p>
+            </div>
+
+            <div id="fieldAccount">
+                <p class="title">Balance:</p>
+                <p id="balance"></p>
+            </div>
         </div>
-    </div>
 
     </div>
 
     <div class="game-box">
-        <p class = "title-box">Gambling</p>
+        <p class="title-box">Gambling</p>
         <div id="fieldAccount">
-            <p class="title">Balance in Contract:</p>    
+            <p class="title">Balance in Contract:</p>
             <p id="balanceContract"></p>
         </div>
 
@@ -53,15 +53,60 @@
             <p>Deposit into Contract</p>
         </button>
 
+        <div>
+            <button id="connect" onclick="flipCoin()">
+                <p>not so random coinflip</p>
+            </button>
+            <br>
+            <canvas id="myCanvas" width="210" height="210"></canvas>
+            <script>
+                var canvas = document.getElementById("myCanvas");
+                var c = canvas.getContext('2d');
+                var W = canvas.width;
+                var H = canvas.height;
+
+                function flipCoin() {
+                    var flip = Math.floor(Math.random() * 2);
+                    console.log(flip);
+
+                    if (flip === 0) {
+                        winner(105, 105, "Gold");
+                    } else {
+                        looser(105, 105, "Silver");
+                    }
+                }
+
+                function winner(xLoc, yLoc, color) {
+                    c.clearRect(0, 0, W, H);
+                    c.beginPath();
+                    c.fillStyle = color;
+                    c.strokeStyle = "Black";
+                    c.lineWidth = 5;
+                    c.arc(xLoc, yLoc, 100, 0, 2 * Math.PI);
+                    c.fill();
+                    c.stroke();
+                    c.closePath();
+                }
+
+                function looser(xLoc, yLoc, color) {
+                    c.clearRect(0, 0, W, H);
+                    c.beginPath();
+                    c.fillStyle = color;
+                    c.strokeStyle = "Black";
+                    c.lineWidth = 5;
+                    c.arc(xLoc, yLoc, 100, 0, 2 * Math.PI);
+                    c.fill();
+                    c.stroke();
+                    c.closePath();
+                }
+            </script>
+        </div>
 
 
     </div>
 
-
 </div>
 
 
-
-    
 </body>
 </html>
