@@ -53,6 +53,58 @@ window.addEventListener("load", (event) => {
 
     });
 
+
+      // Create a function that will open the popup window when the button is clicked
+      document.getElementById('deposit').addEventListener('click', function() {
+        // Popup-Element erstellen
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+      
+        // Titel erstellen
+        const title = document.createElement('h1');
+        title.classList.add('title');
+        title.textContent = 'Deposit';
+        popup.appendChild(title);
+      
+        // Untertitel erstellen
+        const subtitle = document.createElement('h2');
+        subtitle.classList.add('subtitle');
+        subtitle.textContent = 'Enter the amount to deposit:';
+        popup.appendChild(subtitle);
+      
+        // Eingabefeld erstellen
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.classList.add('input');
+        popup.appendChild(input);
+      
+        // Deposit-Button erstellen
+        const depositButton = document.createElement('button');
+        depositButton.textContent = 'Deposit';
+        depositButton.classList.add('button', 'deposit-button');
+        popup.appendChild(depositButton);
+      
+        // Schließen-Button erstellen
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.classList.add('button', 'close-button');
+        popup.appendChild(closeButton);
+      
+        // Popup zum Dokument hinzufügen
+        document.body.appendChild(popup);
+      
+        // Event-Listener für Klick auf Schließen-Button hinzufügen
+        closeButton.addEventListener('click', function() {
+          // Popup entfernen
+          popup.remove();
+        });
+      });
+     
+      
+      
+      
+
+
 });
 
 
