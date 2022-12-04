@@ -13,7 +13,7 @@ contract CoinFlip {
     // Constructor function, called when the contract is deployed
     constructor() public {
         // Set the contract owner to the message sender
-        owner = msg.sender;
+        owner = payable(msg.sender);
 
         // Initialize contract balance to 0
         balance = 0;
@@ -23,7 +23,7 @@ contract CoinFlip {
     }
 
     // Default function, called whenever the contract receives a transaction
-    function() external payable {
+    function fallback() external payable {
         // Check if the contract is updateable
         require(isUpdateable, "Contract is not updateable");
 
@@ -73,10 +73,3 @@ contract CoinFlip {
         isUpdateable = false;
     }
 }
-
-
-
-
-
-
-
