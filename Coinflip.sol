@@ -1,4 +1,4 @@
-pragma solidity ^0.7.0;
+pragma solidity >=0.7.3;
 
 contract CoinFlip {
   // Variablen zum Speichern des aktuellen Kontostands und des aktuellen Einsatzes

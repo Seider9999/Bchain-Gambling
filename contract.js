@@ -4,6 +4,7 @@ window.addEventListener("load", (event) => {
     document.getElementById('Account-section').style.visibility = 'hidden';
 
 
+
     //Get Buttons Button
     const connectButton = document.getElementById("connect");
     const getAccountsButton = document.getElementById("accounts");
