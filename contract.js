@@ -1,4 +1,71 @@
+
 window.addEventListener("load", (event) => {
+ 
+    //wondow object for web3 injection
+    const web3 = new Web3(window.ethereum);
+
+    //Contract Address
+    const contractAddress = '0xC4eA4Bfa0e6c1EDF9CC460d8D784Ae46e8381200';
+    
+    // Import the contract ABI
+    const abi = [
+        {
+                "inputs": [
+                  {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                  }
+                ],
+                "name": "balances",
+                "outputs": [
+                  {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                  }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+              },
+              {
+                "inputs": [],
+                "name": "deposit",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+              },
+              {
+                "inputs": [],
+                "name": "getBalance",
+                "outputs": [
+                  {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                  }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+              },
+              {
+                "inputs": [
+                  {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                  }
+                ],
+                "name": "withdraw",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+              }  
+    ];
+
+    // Create an instance of the contract using the contract ABI and address
+    const contract = new web3.eth.Contract(abi, contractAddress);
+
     isConnected();
     // Hide Option Buttons
     document.getElementById('Account-section').style.visibility = 'hidden';
@@ -44,7 +111,6 @@ window.addEventListener("load", (event) => {
         const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
 
         //Get Balance
-        const web3 = new Web3(window.ethereum);
         const balance = await web3.eth.getBalance(AccountAdress);
         var AccountBalance = balance / 1000000000000000000;
 
@@ -78,12 +144,14 @@ window.addEventListener("load", (event) => {
         input.type = 'number';
         input.classList.add('input');
         popup.appendChild(input);
+        input.id = 'inputField';
       
         // Deposit-Button erstellen
         const depositButton = document.createElement('button');
         depositButton.textContent = 'Deposit';
         depositButton.classList.add('button', 'deposit-button');
         popup.appendChild(depositButton);
+        depositButton.id = 'depositButton';
       
         // Schließen-Button erstellen
         const closeButton = document.createElement('button');
@@ -99,12 +167,37 @@ window.addEventListener("load", (event) => {
           // Popup entfernen
           popup.remove();
         });
+
+        ///
+        // Deposit function
+        ///
+        document.getElementById('depositButton').addEventListener('click', async () => {
+             //Call ETH Accounts
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+        //Display first Adress connected
+        const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
+            // Get the value of the #inputField element
+            var etherAmount = $("#inputField").val();
+            var gasValue = 500000;
+            // Convert the ether amount to the equivalent value in wei
+            const weiValue = Web3.utils.toWei(etherAmount);
+            // Call the deposit() function in the contract
+            contract.methods.deposit().send({from: AccountAdress, gas: gasValue, value: weiValue})
+                .then(function(receipt) {
+                // The deposit was successful, show a success message
+                console.log("Deposit successful!");
+                })
+                .catch(function(error) {
+                // The deposit failed, show an error message
+                console.error("Error making deposit: " + error);
+            });
+        }); 
+       
       });
      
-      
-      
-      
 
+   
 
 });
 
