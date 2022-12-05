@@ -29,7 +29,7 @@ contract CoinFlip {
 
 //Sender Balance
     function getBalanceSender() public view returns(uint){
-        return msg.sender.balance;
+        return balances[msg.sender];
     }    
 
 

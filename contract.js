@@ -5,7 +5,7 @@ window.addEventListener("load", (event) => {
   const web3 = new Web3(window.ethereum);
 
   //Contract Address
-  const contractAddress = '0x3115c607de2f24f77c2aC7D75fA169308b3FDD75';
+  const contractAddress = '0x87E45a5aDA4c1A19f2320c8481aC277e525c97E0';
 
   // Import the contract ABI
   const abi = [
@@ -244,7 +244,7 @@ window.addEventListener("load", (event) => {
         console.error(error);
       } else {
         // If there was no error, display the balance in the input field
-        resultBalanceSender = Web3.utils.fromWei(result);
+       resultBalanceSender = Web3.utils.fromWei(result);
         if (result > 0) {
           // If the balance is more than zero, display it
           document.getElementById('balanceContractSender').innerText = resultBalanceSender + " ETH";
