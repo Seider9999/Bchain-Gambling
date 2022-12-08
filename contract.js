@@ -5,10 +5,79 @@ window.addEventListener("load", (event) => {
   const web3 = new Web3(window.ethereum);
 
   //Contract Address
-  const contractAddress = '0x87E45a5aDA4c1A19f2320c8481aC277e525c97E0';
+  const contractAddress = '0x9616d9D43fA31374f726042d7c6655864e5Ecc5c';
 
   // Import the contract ABI
   const abi = [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_airnodeRrp",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "requestId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "response",
+              "type": "uint256"
+            }
+          ],
+          "name": "ReceivedUint256",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "requestId",
+              "type": "bytes32"
+            }
+          ],
+          "name": "RequestedUint256",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "airnode",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "airnodeRrp",
+          "outputs": [
+            {
+              "internalType": "contract IAirnodeRrpV0",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
         {
           "inputs": [
             {
@@ -37,6 +106,56 @@ window.addEventListener("load", (event) => {
         },
         {
           "inputs": [],
+          "name": "endpointIdUint256",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "name": "expectingRequestWithIdToBeFulfilled",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "requestId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "name": "fulfillUint256",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "getBalance",
           "outputs": [
             {
@@ -49,13 +168,101 @@ window.addEventListener("load", (event) => {
           "type": "function"
         },
         {
-          "inputs": [],
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_user",
+              "type": "address"
+            }
+          ],
           "name": "getBalanceSender",
           "outputs": [
             {
               "internalType": "uint256",
               "name": "",
               "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getRandom",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "makeRequestUint256",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "randomNumberReturn",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_airnode",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "_endpointIdUint256",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "_sponsorWallet",
+              "type": "address"
+            }
+          ],
+          "name": "setRequestParameters",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "sponsorWallet",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
             }
           ],
           "stateMutability": "view",
@@ -81,7 +288,7 @@ window.addEventListener("load", (event) => {
 
   isConnected();
   getBalance();
-  getBalanceSender();
+  getUserBalance();
 
   // Hide Option Buttons
   document.getElementById('Account-section').style.visibility = 'hidden';
@@ -237,23 +444,19 @@ window.addEventListener("load", (event) => {
   //
   // Get Balance of Contract Sender
   //
-  async function getBalanceSender() {
-    // Use the contract object to call the getBalance() function
-    contract.methods.getBalanceSender().call(function (error, result) {
-      if (error) {
-        console.error(error);
-      } else {
-        // If there was no error, display the balance in the input field
-       resultBalanceSender = Web3.utils.fromWei(result);
-        if (result > 0) {
-          // If the balance is more than zero, display it
-          document.getElementById('balanceContractSender').innerText = resultBalanceSender + " ETH";
-        } else {
-          // If the balance is zero, display a message
-          document.getElementById('balanceContractSender').innerText = "No Funds In contract";
-        }
-      }
-    });
+// Call the getBalanceUser function with the specified user address
+async function getUserBalance(){
+//Call ETH Accounts
+const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+//Display first Adress connected
+const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
+contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
+  resultETH = Web3.utils.fromWei(result);
+  document.getElementById('balanceContractSender').innerText = resultETH + " ETH";
+
+});
+ 
   }
 
 

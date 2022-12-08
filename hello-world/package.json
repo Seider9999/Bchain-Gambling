@@ -12,5 +12,8 @@
     "@nomiclabs/hardhat-ethers": "^2.2.1",
     "ethers": "^5.7.2",
     "hardhat": "^2.12.3"
+  },
+  "dependencies": {
+    "@api3/airnode-protocol": "^0.9.1"
   }
 }
