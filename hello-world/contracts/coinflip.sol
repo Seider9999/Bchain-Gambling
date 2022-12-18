@@ -37,7 +37,7 @@ contract CoinFlipBchain is RrpRequesterV0 {
 
     // Calls the AirnodeRrp contract with a request
     // airnodeRrp.makeFullRequest() returns a requestId to hold onto.
-    function makeRequestUint256() external {
+    function makeRequestUint256() public {
         bytes32 requestId = airnodeRrp.makeFullRequest(
             airnode,
             endpointIdUint256,
@@ -64,9 +64,9 @@ contract CoinFlipBchain is RrpRequesterV0 {
         );
         expectingRequestWithIdToBeFulfilled[requestId] = false;
         uint256 qrngUint256 = abi.decode(data, (uint256));
-        // Do what you want with `qrngUint256` here...
+        
 
-        randomNumberReturn = qrngUint256 % 25;
+        randomNumberReturn = qrngUint256 % 1000000;
         emit ReceivedUint256(requestId, qrngUint256);
     }
 
@@ -74,33 +74,71 @@ contract CoinFlipBchain is RrpRequesterV0 {
         return randomNumberReturn;
     }
 
-// Mapping user Funds
-    mapping(address => uint) public balances;
+    // Mapping user Funds
+    mapping(address => uint256) public balances;
 
-// Add to msg.value
-    function deposit() public payable{
-        balances[msg.sender] += msg.value; 
+    // Add to msg.value
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;
     }
-    
-//Withdraw function
-    function withdraw(uint _amount) public{
+
+    //Withdraw function
+    function withdraw(uint256 _amount) public {
         //require arg to make sure the balance of the sender is >= _amount if not ERR
-        require(balances[msg.sender]>= _amount, "Not enough ether");
-        //if the amount is availabe we subtract it from the sender 
+        require(balances[msg.sender] >= _amount, "Not enough ether");
+        //if the amount is availabe we subtract it from the sender
         balances[msg.sender] -= _amount;
         //True bool is called to confirm the amount
-        (bool sent,) = msg.sender.call{value: _amount}("Sent");
+        (bool sent, ) = msg.sender.call{value: _amount}("Sent");
         require(sent, "failed to send ETH");
-  
     }
 
-//Contract Balance
-    function getBalance() public view returns(uint){
+    //Contract Balance
+    function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
 
-//Sender Balance
-    function getBalanceSender(address _user) public view returns(uint){
+    //Sender Balance
+    function getBalanceSender(address _user) public view returns (uint256) {
         return balances[_user];
-    }    
+    }
+
+    // Bet Function for Betting on Number 1 (EVEN)
+    function betOnEven(uint betAmount) public payable {
+
+    uint256 randomNumber = getRandom();
+    // if the random number is even
+    if (randomNumber % 2 == 0) {
+        // add the betAmount to the msg.sender
+        makeRequestUint256();
+        balances[msg.sender] += betAmount;
+    } else {
+        // if the number is odd, cut the betAmount from the msg.sender
+        makeRequestUint256();
+        balances[msg.sender] -= betAmount;
+    }
+
+    
+}
+
+// Bet Function for Betting on Number 2 (ODD)
+    function betOnOdd(uint betAmount) public payable {
+
+    uint256 randomNumber = getRandom();
+    // if the random number is even, cut the betAmount from the msg.sender
+    if (randomNumber % 2 == 0) {
+        // t to the msg.sender
+        makeRequestUint256();
+        balances[msg.sender] -= betAmount;
+    } else {
+        // if the number is odd, add the betAmount to the msg.sender
+        makeRequestUint256();
+        balances[msg.sender] += betAmount;
+    }
+}
+
+
+
+
+
 }

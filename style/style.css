@@ -50,7 +50,7 @@ body{
 /* Game Box       */
 /*                */
 .master-wrap .game-box{
-    height: 600px;
+    height: 500px;
     width: 700px;
     background-color: #fff ;
     margin: 0 auto;
@@ -142,10 +142,10 @@ body{
     height: 50px;
     width: 200px;
     border: none;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(222,165,227,1) 0%, rgba(0,212,255,1) 100%);
-    color: #fff;
-    margin-top: 25px;
+    border: 1px solid #000;
+    color: #000;
     cursor: pointer;
+    margin-top: 20px;
 
 }
 
@@ -155,9 +155,22 @@ body{
     height: 50px;
     width: 200px;
     border: none;
+    border: 1px solid #000;
+    color: #000;
+    cursor: pointer;
+    margin-top: 20px;
+
+}
+
+#gamble{
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    width: 200px;
+    border: none;
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(222,165,227,1) 0%, rgba(0,212,255,1) 100%);
     color: #fff;
-    margin-top: 25px;
+    margin-top: 50px;
     cursor: pointer;
 
 }

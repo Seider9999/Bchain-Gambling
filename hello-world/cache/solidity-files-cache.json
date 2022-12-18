@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\xampp2\\htdocs\\Bchain-Gambling\\hello-world\\contracts\\coinflip.sol": {
-      "lastModificationDate": 1670513026965,
-      "contentHash": "2f44001e4af8dee813a45c7fb638ba43",
+      "lastModificationDate": 1671402366529,
+      "contentHash": "665b5114ef595b5f0cefdbc1753f1fa7",
       "sourceName": "contracts/coinflip.sol",
       "solcConfig": {
         "version": "0.8.9",

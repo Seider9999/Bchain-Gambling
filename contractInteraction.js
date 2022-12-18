@@ -5,7 +5,7 @@ window.addEventListener("load", (event) => {
   const web3 = new Web3(window.ethereum);
 
   //Contract Address
-  const contractAddress = '0x9616d9D43fA31374f726042d7c6655864e5Ecc5c';
+  const contractAddress = '0xafaff8728dAF0E2F37dB28282E40fE24C2333761';
 
   // Import the contract ABI
   const abi = [
@@ -95,6 +95,32 @@ window.addEventListener("load", (event) => {
             }
           ],
           "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "betAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "betOnEven",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "betAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "betOnOdd",
+          "outputs": [],
+          "stateMutability": "payable",
           "type": "function"
         },
         {
@@ -539,6 +565,199 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
 
     });
   });
+
+  ///////
+  // GAMBLE BUTTON
+  //////
+  document.getElementById('gamble').addEventListener('click', function () {
+    // Popup-Element erstellen
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+
+    // Titel erstellen
+    const title = document.createElement('h1');
+    title.classList.add('title');
+    title.textContent = 'Gamble';
+    popup.appendChild(title);
+
+    // Untertitel erstellen
+    const subtitle = document.createElement('h2');
+    subtitle.classList.add('subtitle');
+    subtitle.textContent = 'Enter the amount to bet:';
+    popup.appendChild(subtitle);
+
+    // Eingabefeld erstellen
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.classList.add('input');
+    popup.appendChild(input);
+    input.id = 'inputField';
+
+    //Münze Erstellen
+    const imgCoin = document.createElement('img');
+    imgCoin.src = 'img/gamble0.png';
+    imgCoin.width = 200;
+    imgCoin.height = 200;
+    imgCoin.style.display = 'block';
+    imgCoin.style.margin = 'auto';
+    popup.appendChild(imgCoin);
+
+    // Untertitel Progress erstellen
+    const subtitle2 = document.createElement('h2');
+    subtitle2.classList.add('subtitle');
+    subtitle2.textContent = 'Confirm the Fee, then wait, betting is in progress!';
+    popup.appendChild(subtitle2);
+    subtitle2.id = 'subtitle2';
+    subtitle2.style.visibility = 'hidden';
+
+    // Untertitel WIN erstellen
+    const subtitlewin = document.createElement('h2');
+    subtitlewin.classList.add('subtitle');
+    subtitlewin.textContent = 'Congratulations, you won!';
+    popup.appendChild(subtitlewin);
+    subtitlewin.id = 'subtitlewin';
+    subtitlewin.style.visibility = 'hidden';
+
+    // Untertitel LOSS erstellen
+    const subtitleloss = document.createElement('h2');
+    subtitleloss.classList.add('subtitle');
+    subtitleloss.textContent = 'So sorry, you lost!';
+    popup.appendChild(subtitleloss);
+    subtitleloss.id = 'subtitleloss';
+    subtitleloss.style.visibility = 'hidden';
+
+
+    // Betting-Button 1 erstellen
+    const depositButton = document.createElement('button');
+    depositButton.textContent = 'Bet on 1';
+    depositButton.classList.add('button', 'deposit-button');
+    popup.appendChild(depositButton);
+    depositButton.id = 'betButton';
+
+    // Betting-Button 2 erstellen
+    const depositButton2 = document.createElement('button');
+    depositButton2.textContent = 'Bet on 2';
+    depositButton2.classList.add('button', 'deposit-button2');
+    popup.appendChild(depositButton2);
+    depositButton2.id = 'betButton2';
+
+    // Schließen-Button erstellen
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.classList.add('button', 'close-button');
+    popup.appendChild(closeButton);
+    closeButton.id = 'closeButton';
+
+    // Popup zum Dokument hinzufügen
+    document.body.appendChild(popup);
+
+    // Event-Listener für Klick auf Schließen-Button hinzufügen
+    closeButton.addEventListener('click', function () {
+      // Popup entfernen
+      popup.remove();
+    });
+
+    ///
+    // BETTING FUNCTION 1 FOR EVEN
+    ///
+    document.getElementById('betButton').addEventListener('click', async () => {
+      //define Input field and unser balance
+      var etherAmountBet = $("#inputField").val();
+
+      //Get user Balance and Contract balance
+
+
+      if (etherAmountBet > 0) {
+        //hide Buttons
+        document.getElementById('betButton').style.visibility = 'hidden';
+        document.getElementById('betButton2').style.visibility = 'hidden';
+        document.getElementById('subtitle2').style.visibility = 'visible';
+        document.getElementById('closeButton').style.visibility = 'hidden';
+        //Transition animation
+        let currentImage = 0;
+        const images = ['img/gamble1.png', 'img/gamble2.png'];
+        setInterval(() => {
+          currentImage = (currentImage + 1) % images.length;
+          imgCoin.src = images[currentImage];
+        }, 200); // switch images every 1000 milliseconds (1 second)
+
+        // Get the value from the input field
+        const betAmountbefore = document.getElementById('inputField').value;
+        const betAmount = Web3.utils.toWei(betAmountbefore);
+
+        //////////////////////////////////////
+        //Call MakeRequestUINT
+        //////////////////////////////////////
+        //Call ETH Accounts
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
+
+        //Call Function MakeRequest
+        contract.methods.betOnEven(betAmount).send({ from: AccountAdress })
+          .then(function (receipt) {
+            console.log("Success: gamble Initiated");
+            //Dig Deeper and get randomnumber
+            contract.methods.getRandom().call(function (error, result) {
+              randomNumber = result
+              console.log("Fetching Randomn Number");
+              console.log("Randomn Number: " + randomNumber);
+              console.log("Initiating Request for new Random Number");
+              //Display winner or loser content
+              if (randomNumber % 2 == 0) {
+                //Winner
+                console.log("User won, increasing Balance");
+                document.getElementById('subtitlewin').style.visibility = 'visible';
+                document.getElementById('subtitle2').style.visibility = 'hidden';
+                document.getElementById('closeButton').style.visibility = 'visible';
+                //Set Image 1
+                clearInterval(intervalId);
+                imgCoin.src = 'img/gamble1.png';
+              } else {
+                console.log("User lost, cutting Balance");
+                document.getElementById('subtitleloss').style.visibility = 'visible';
+                document.getElementById('subtitle2').style.visibility = 'hidden';
+                document.getElementById('closeButton').style.visibility = 'visible';
+                //Set Image 2
+                clearInterval(intervalId);
+                imgCoin.src = 'img/gamble2.png';
+              }
+
+
+
+            });
+
+          }).catch(function (error) {
+            console.log("Error");
+          });
+
+
+
+      } else {
+        alert('Error: Please choose a correct Betting Amount');
+      }
+
+
+    });
+
+    ///
+    // BETTING FUNCTION 2
+    ///
+    document.getElementById('betButton2').addEventListener('click', async () => {
+      //Transition animation
+      let currentImage = 0;
+      const images = ['img/gamble1.png', 'img/gamble2.png'];
+      setInterval(() => {
+        currentImage = (currentImage + 1) % images.length;
+        imgCoin.src = images[currentImage];
+      }, 200); // switch images every 1000 milliseconds (1 second)
+    });
+
+  });
+
+
+
+
+
 
 
 
