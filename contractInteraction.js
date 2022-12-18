@@ -721,26 +721,15 @@ window.addEventListener("load", (event) => {
                 //Set Image 2
                 clearInterval(intervalId);
                 imgCoin.src = 'img/gamble2.png';
-
               }
-
-
-
             });
-
           }).catch(function (error) {
             console.log("Error");
           });
-
-
-
       } else {
         alert('Error: Please choose a correct Betting Amount');
       }
-
-
     });
-
     ///
     // BETTING FUNCTION 2 FOR ODD
     ///
@@ -749,7 +738,6 @@ window.addEventListener("load", (event) => {
       var etherAmountBet = $("#inputField").val();
 
       //Get user Balance and Contract balance
-
 
       if (etherAmountBet > 0) {
         //hide Buttons
@@ -805,43 +793,16 @@ window.addEventListener("load", (event) => {
                 //Set Image 1
                 clearInterval(intervalId);
                 imgCoin.src = 'img/gamble2.png';
-
               }
-
-
-
             });
-
           }).catch(function (error) {
             console.log("Error");
           });
-
-
-
       } else {
         alert('Error: Please choose a correct Betting Amount');
       }
-
-
     });
-
-
-
-
-
-
-
-
   });
-
-
-
-
-
-
-
-
-
 });
 
 
