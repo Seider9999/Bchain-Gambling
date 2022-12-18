@@ -9,304 +9,304 @@ window.addEventListener("load", (event) => {
 
   // Import the contract ABI
   const abi = [
+    {
+      "inputs": [
         {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_airnodeRrp",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "bytes32",
-              "name": "requestId",
-              "type": "bytes32"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "response",
-              "type": "uint256"
-            }
-          ],
-          "name": "ReceivedUint256",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "bytes32",
-              "name": "requestId",
-              "type": "bytes32"
-            }
-          ],
-          "name": "RequestedUint256",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "airnode",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "airnodeRrp",
-          "outputs": [
-            {
-              "internalType": "contract IAirnodeRrpV0",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "name": "balances",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "betAmount",
-              "type": "uint256"
-            }
-          ],
-          "name": "betOnEven",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "betAmount",
-              "type": "uint256"
-            }
-          ],
-          "name": "betOnOdd",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "deposit",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "endpointIdUint256",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "name": "expectingRequestWithIdToBeFulfilled",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "bytes32",
-              "name": "requestId",
-              "type": "bytes32"
-            },
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            }
-          ],
-          "name": "fulfillUint256",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "getBalance",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_user",
-              "type": "address"
-            }
-          ],
-          "name": "getBalanceSender",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "getRandom",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "makeRequestUint256",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "randomNumberReturn",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_airnode",
-              "type": "address"
-            },
-            {
-              "internalType": "bytes32",
-              "name": "_endpointIdUint256",
-              "type": "bytes32"
-            },
-            {
-              "internalType": "address",
-              "name": "_sponsorWallet",
-              "type": "address"
-            }
-          ],
-          "name": "setRequestParameters",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "sponsorWallet",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "withdraw",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
+          "internalType": "address",
+          "name": "_airnodeRrp",
+          "type": "address"
         }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "requestId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "response",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReceivedUint256",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "requestId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RequestedUint256",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "airnode",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "airnodeRrp",
+      "outputs": [
+        {
+          "internalType": "contract IAirnodeRrpV0",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balances",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "betAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "betOnEven",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "betAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "betOnOdd",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "endpointIdUint256",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "expectingRequestWithIdToBeFulfilled",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "requestId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "fulfillUint256",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "getBalanceSender",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRandom",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "makeRequestUint256",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "randomNumberReturn",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_airnode",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_endpointIdUint256",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "_sponsorWallet",
+          "type": "address"
+        }
+      ],
+      "name": "setRequestParameters",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "sponsorWallet",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
   ];
 
   // Create an instance of the contract using the contract ABI and address
@@ -470,19 +470,19 @@ window.addEventListener("load", (event) => {
   //
   // Get Balance of Contract Sender
   //
-// Call the getBalanceUser function with the specified user address
-async function getUserBalance(){
-//Call ETH Accounts
-const accounts = await ethereum.request({ method: 'eth_accounts' });
+  // Call the getBalanceUser function with the specified user address
+  async function getUserBalance() {
+    //Call ETH Accounts
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-//Display first Adress connected
-const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
-contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
-  resultETH = Web3.utils.fromWei(result);
-  document.getElementById('balanceContractSender').innerText = resultETH + " ETH";
+    //Display first Adress connected
+    const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
+    contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
+      resultETH = Web3.utils.fromWei(result);
+      document.getElementById('balanceContractSender').innerText = resultETH + " ETH";
 
-});
- 
+    });
+
   }
 
 
@@ -538,15 +538,15 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
     //
     withdrawButtonPopUp.addEventListener('click', async () => {
 
-       //Call ETH Accounts
-       const accounts = await ethereum.request({ method: 'eth_accounts' });
+      //Call ETH Accounts
+      const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-       //Display first Adress connected
-       const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
-      
-       // Get the amount to withdraw from the input field
+      //Display first Adress connected
+      const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
+
+      // Get the amount to withdraw from the input field
       var etherAmount = $("#inputFieldWithdraw").val();
-     
+
       // Convert the ether amount to the equivalent value in wei
       const _amount = Web3.utils.toWei(etherAmount);
 
@@ -660,6 +660,7 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
     ///
     // BETTING FUNCTION 1 FOR EVEN
     ///
+    let intervalId;
     document.getElementById('betButton').addEventListener('click', async () => {
       //define Input field and unser balance
       var etherAmountBet = $("#inputField").val();
@@ -676,7 +677,7 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
         //Transition animation
         let currentImage = 0;
         const images = ['img/gamble1.png', 'img/gamble2.png'];
-        setInterval(() => {
+        intervalId = setInterval(() => { // Assign the returned value to intervalId
           currentImage = (currentImage + 1) % images.length;
           imgCoin.src = images[currentImage];
         }, 200); // switch images every 1000 milliseconds (1 second)
@@ -705,7 +706,7 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
               //Display winner or loser content
               if (randomNumber % 2 == 0) {
                 //Winner
-                console.log("User won, increasing Balance");
+                console.log("User won, increasing Balance of " + betAmount);
                 document.getElementById('subtitlewin').style.visibility = 'visible';
                 document.getElementById('subtitle2').style.visibility = 'hidden';
                 document.getElementById('closeButton').style.visibility = 'visible';
@@ -713,13 +714,14 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
                 clearInterval(intervalId);
                 imgCoin.src = 'img/gamble1.png';
               } else {
-                console.log("User lost, cutting Balance");
+                console.log("User lost, cutting Balance of " + betAmount);
                 document.getElementById('subtitleloss').style.visibility = 'visible';
                 document.getElementById('subtitle2').style.visibility = 'hidden';
                 document.getElementById('closeButton').style.visibility = 'visible';
                 //Set Image 2
                 clearInterval(intervalId);
                 imgCoin.src = 'img/gamble2.png';
+
               }
 
 
@@ -740,17 +742,95 @@ contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
     });
 
     ///
-    // BETTING FUNCTION 2
+    // BETTING FUNCTION 2 FOR ODD
     ///
     document.getElementById('betButton2').addEventListener('click', async () => {
-      //Transition animation
-      let currentImage = 0;
-      const images = ['img/gamble1.png', 'img/gamble2.png'];
-      setInterval(() => {
-        currentImage = (currentImage + 1) % images.length;
-        imgCoin.src = images[currentImage];
-      }, 200); // switch images every 1000 milliseconds (1 second)
+      //define Input field and unser balance
+      var etherAmountBet = $("#inputField").val();
+
+      //Get user Balance and Contract balance
+
+
+      if (etherAmountBet > 0) {
+        //hide Buttons
+        document.getElementById('betButton').style.visibility = 'hidden';
+        document.getElementById('betButton2').style.visibility = 'hidden';
+        document.getElementById('subtitle2').style.visibility = 'visible';
+        document.getElementById('closeButton').style.visibility = 'hidden';
+        //Transition animation
+        let currentImage = 0;
+        const images = ['img/gamble1.png', 'img/gamble2.png'];
+        intervalId = setInterval(() => { // Assign the returned value to intervalId
+          currentImage = (currentImage + 1) % images.length;
+          imgCoin.src = images[currentImage];
+        }, 200); // switch images every 1000 milliseconds (1 second)
+
+        // Get the value from the input field
+        const betAmountbefore = document.getElementById('inputField').value;
+        const betAmount = Web3.utils.toWei(betAmountbefore);
+
+        //////////////////////////////////////
+        //Call MakeRequestUINT
+        //////////////////////////////////////
+        //Call ETH Accounts
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
+
+        //Call Function MakeRequest
+        contract.methods.betOnOdd(betAmount).send({ from: AccountAdress })
+          .then(function (receipt) {
+            console.log("Success: gamble Initiated");
+            //Dig Deeper and get randomnumber
+            contract.methods.getRandom().call(function (error, result) {
+              randomNumber = result
+              console.log("Fetching Randomn Number");
+              console.log("Randomn Number: " + randomNumber);
+              console.log("Initiating Request for new Random Number");
+              //Display winner or loser content
+              if (randomNumber % 2 == 0) {
+                //looser
+                console.log("User lost, cutting Balance of " + betAmount);
+                document.getElementById('subtitleloss').style.visibility = 'visible';
+                document.getElementById('subtitle2').style.visibility = 'hidden';
+                document.getElementById('closeButton').style.visibility = 'visible';
+                //Set Image 2
+                clearInterval(intervalId);
+                imgCoin.src = 'img/gamble1.png';
+              } else {
+                //Winner
+                console.log("User won, increasing Balance of " + betAmount);
+                document.getElementById('subtitlewin').style.visibility = 'visible';
+                document.getElementById('subtitle2').style.visibility = 'hidden';
+                document.getElementById('closeButton').style.visibility = 'visible';
+                //Set Image 1
+                clearInterval(intervalId);
+                imgCoin.src = 'img/gamble2.png';
+
+              }
+
+
+
+            });
+
+          }).catch(function (error) {
+            console.log("Error");
+          });
+
+
+
+      } else {
+        alert('Error: Please choose a correct Betting Amount');
+      }
+
+
     });
+
+
+
+
+
+
+
 
   });
 
