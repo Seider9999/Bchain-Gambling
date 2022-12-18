@@ -687,7 +687,7 @@ window.addEventListener("load", (event) => {
         const betAmount = Web3.utils.toWei(betAmountbefore);
 
         //////////////////////////////////////
-        //Call MakeRequestUINT
+        //Call BET ON EVEN
         //////////////////////////////////////
         //Call ETH Accounts
         const accounts = await ethereum.request({ method: 'eth_accounts' });
@@ -758,7 +758,7 @@ window.addEventListener("load", (event) => {
         const betAmount = Web3.utils.toWei(betAmountbefore);
 
         //////////////////////////////////////
-        //Call MakeRequestUINT
+        //Call BET ON ODD
         //////////////////////////////////////
         //Call ETH Accounts
         const accounts = await ethereum.request({ method: 'eth_accounts' });
