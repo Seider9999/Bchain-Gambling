@@ -315,7 +315,7 @@ window.addEventListener("load", (event) => {
   isConnected();
   getBalance();
   getUserBalance();
-
+  var UserBalanceETH = {};
   // Hide Option Buttons
   document.getElementById('Account-section').style.visibility = 'hidden';
 
@@ -355,14 +355,11 @@ window.addEventListener("load", (event) => {
   getAccountsButton.addEventListener('click', async () => {
     //Call ETH Accounts
     const accounts = await ethereum.request({ method: 'eth_accounts' });
-
     //Display first Adress connected
     const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
-
     //Get Balance
     const balance = await web3.eth.getBalance(AccountAdress);
     var AccountBalance = balance / 1000000000000000000;
-
     //Write to Box
     document.getElementById('adress').innerText = AccountAdress
     document.getElementById('balance').innerText = AccountBalance + " ETH"
@@ -374,7 +371,6 @@ window.addEventListener("load", (event) => {
     // Popup-Element erstellen
     const popup = document.createElement('div');
     popup.classList.add('popup');
-
     // Titel erstellen
     const title = document.createElement('h1');
     title.classList.add('title');
@@ -472,17 +468,17 @@ window.addEventListener("load", (event) => {
   //
   // Call the getBalanceUser function with the specified user address
   async function getUserBalance() {
+    let resultETH;
     //Call ETH Accounts
     const accounts = await ethereum.request({ method: 'eth_accounts' });
 
     //Display first Adress connected
     const AccountAdress = accounts[0] || 'Not able to get accounts // Please Connect your Wallet';
     contract.methods.getBalanceSender(AccountAdress).call(function (error, result) {
-      resultETH = Web3.utils.fromWei(result);
-      document.getElementById('balanceContractSender').innerText = resultETH + " ETH";
-
+      UserBalanceETH.resultETH = Web3.utils.fromWei(result);
+      document.getElementById('balanceContractSender').innerText = UserBalanceETH.resultETH + " ETH";
     });
-
+    return resultETH;
   }
 
 
@@ -664,11 +660,8 @@ window.addEventListener("load", (event) => {
     document.getElementById('betButton').addEventListener('click', async () => {
       //define Input field and unser balance
       var etherAmountBet = $("#inputField").val();
-
-      //Get user Balance and Contract balance
-
-
-      if (etherAmountBet > 0) {
+      
+      if (UserBalanceETH.resultETH >= etherAmountBet > 0) {
         //hide Buttons
         document.getElementById('betButton').style.visibility = 'hidden';
         document.getElementById('betButton2').style.visibility = 'hidden';
@@ -727,8 +720,9 @@ window.addEventListener("load", (event) => {
             console.log("Error");
           });
       } else {
-        alert('Error: Please choose a correct Betting Amount');
-      }
+        alert('Error: Please choose a correct Betting Amount (To high)');
+      
+    }
     });
     ///
     // BETTING FUNCTION 2 FOR ODD
@@ -739,7 +733,7 @@ window.addEventListener("load", (event) => {
 
       //Get user Balance and Contract balance
 
-      if (etherAmountBet > 0) {
+      if (UserBalanceETH.resultETH >= etherAmountBet > 0) {
         //hide Buttons
         document.getElementById('betButton').style.visibility = 'hidden';
         document.getElementById('betButton2').style.visibility = 'hidden';
