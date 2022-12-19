@@ -6,9 +6,8 @@ contract CoinFlipBchain is RrpRequesterV0 {
     event RequestedUint256(bytes32 indexed requestId);
     event ReceivedUint256(bytes32 indexed requestId, uint256 response);
 
-    //set the owner of the contract (can use OZ library too)
     address public owner;
-    // These can be set using setRequestParameters())
+    // setRequestParameters())
     address public airnode;
     bytes32 public endpointIdUint256;
     address public sponsorWallet;
